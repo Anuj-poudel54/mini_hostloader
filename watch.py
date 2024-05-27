@@ -3,6 +3,7 @@ import time
 from watchers import Watcher
 from pathlib import Path
 import os
+import sys
 
 
 class Main:
@@ -20,7 +21,8 @@ class Main:
         self.event_handler.add_command(on_change_command)
 
         if self.file_with_paths and not os.path.isfile(self.file_with_paths):
-            raise FileNotFoundError("Path you provided is not a file path.")
+            raise FileNotFoundError(
+                f"'{self.file_with_paths}' not a file path.")
 
         if not self.file_with_paths and not self.path_to_watch:
             raise Exception("Either provide single path or file with path")
@@ -75,5 +77,26 @@ class Main:
 
 
 if __name__ == "__main__":
-    Main(Watcher(), "echo 'modification detected'",
-         path_to_watch="path/to/dir").watch()
+    args: list[str] = sys.argv[1:]
+    if not args:
+        raise Exception("please provide arguement")
+
+    value_args: dict = {}
+    for arg in args[:]:
+        split_arg = arg.split("=")
+        value_args[split_arg[0].lower()] = split_arg[1] if len(
+            split_arg) > 1 else True
+
+    dir_to_watch = value_args.get("--dir")
+    file_with_paths = value_args.get("--file")
+    command = value_args.get("--cmd")
+    recursive = bool(value_args.get("-r"))
+
+    if not dir_to_watch and not file_with_paths:
+        raise Exception("Please provide values for --file or --dir")
+
+    if not command:
+        raise Exception("Please provide command using --cmd")
+
+    Main(Watcher(), command,
+         path_to_watch=dir_to_watch, file_with_paths=file_with_paths).watch()
