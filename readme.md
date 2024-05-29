@@ -19,7 +19,7 @@ python watch.py [args]
 
 **-r**: Watch subdirectory or not default is False
 
-*Note:* If both --file and --dir is given --dir will be prioratized
+*Note:* If both --file and --dir is given --dir will be prioritize
 
 ## Example
 
@@ -39,3 +39,9 @@ Here "all_path.txt" file is used to get all the directories
 python watch.py --dir="/path/to/dir"
 ```
 It will just watch *dir* directory.
+
+If all subdirectories of *dir* should be watched than
+
+```python
+python watch.py --dir="/path/to/dir" -r
+```
