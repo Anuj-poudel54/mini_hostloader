@@ -20,3 +20,22 @@ python watch.py [args]
 **-r**: Watch subdirectory or not default is False
 
 *Note:* If both --file and --dir is given --dir will be prioratized
+
+## Example
+
+```python
+python watch.py --file="/path/to/file/all_paths.txt"
+```
+
+Here "all_path.txt" file is used to get all the directories
+
+*all_path.txt* may look like
+```text
+/path/to/dir1
+/path/to/dir2
+/path/to/dir3
+```
+```python
+python watch.py --dir="/path/to/dir"
+```
+It will just watch *dir* directory.
