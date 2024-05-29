@@ -24,7 +24,7 @@ python watch.py [args]
 ## Example
 
 ```python
-python watch.py --file="/path/to/file/all_paths.txt"
+python watch.py --file="/path/to/file/all_paths.txt" --cmd="echo Hello"
 ```
 
 Here "all_path.txt" file is used to get all the directories
@@ -36,12 +36,12 @@ Here "all_path.txt" file is used to get all the directories
 /path/to/dir3
 ```
 ```python
-python watch.py --dir="/path/to/dir"
+python watch.py --dir="/path/to/dir" --cmd="echo Hello"
 ```
 It will just watch *dir* directory.
 
 If all subdirectories of *dir* should be watched than
 
 ```python
-python watch.py --dir="/path/to/dir" -r
+python watch.py --dir="/path/to/dir" --cmd="echo Hello" -r
 ```
